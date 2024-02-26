@@ -3,16 +3,26 @@ package patterns.creational.factorymethod;
 public class FactoryPatternDemo {
 
     public static void main(String[] args) {
-        ShapeFactory shapeFactory = new ShapeFactory();
+        try {
+            ShapeFactory circleFactory = new CircleFactory();
+            Shape circle = circleFactory.createShape();
+            circle.draw();
 
-        Shape circle = shapeFactory.getShape("CIRCLE");
-        circle.draw();
+            ShapeFactory squareFactory = new SquareFactory();
+            Shape square = squareFactory.createShape();
+            square.draw();
 
-        Shape rectangle = shapeFactory.getShape("RECTANGLE");
-        rectangle.draw();
+            ShapeFactory rectangleFactory = new RectangleFactory();
+            Shape rectangle = rectangleFactory.createShape();
+            rectangle.draw();
 
-        Shape square = shapeFactory.getShape("SQUARE");
-        square.draw();
+            ShapeFactory unknownShapeFactory = new UnknownShapeFactory();
+            Shape unknownShape = unknownShapeFactory.createShape();
+            unknownShape.draw();
+
+        } catch (UnknownShapeException e) {
+            System.out.println("An exception occurred: " + e.getMessage());
+        }
 
     }
 }
